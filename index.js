@@ -13,19 +13,15 @@ function getAlbums() {
     const request = sendAlbumsRequest();
     request.then((response) => {
         renderAlbums(response);
+        getFirstAlbum()
     });
 }
 
-function setActive() {
+function getFirstAlbum() {
     const album = $('.js-album:first');
-    album.addClass('active-album');
-    getActiveAlbum();
-}
-
-function getActiveAlbum() {
-    const album = $('.active-album');
     getPhotos(album.attr('id'))
 }
+
 
 function getPhotos(albumID) {
     const photos = sendPhotosRequest(albumID);
@@ -37,7 +33,6 @@ function getPhotos(albumID) {
 function createAlbumEventListener() {
     albumsList.click((event) => {
         if (event.target.classList.contains('js-album')) {
-            clearActive();
             clearGallery();
             getPhotos(event.target.id);
         }
@@ -86,7 +81,6 @@ function sendPhotosRequest(albumID) {
 function renderAlbums(response) {
     const album = response.map(album => getAlbumItem(album));
     albumsList.html(album.join(''));
-    setActive()
 }
 
 function renderPhotos(response) {
@@ -95,10 +89,6 @@ function renderPhotos(response) {
 }
 
 //CLEAR
-function clearActive() {
-    albumsList.find('.active-album').removeClass('active-album');
-}
-
 function clearGallery() {
     gallery.html('');
 }
