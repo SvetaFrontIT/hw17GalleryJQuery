@@ -56,11 +56,29 @@ function getPhotoItem(photo) {
 //REQUESTS
 
 function sendAlbumsRequest() {
-    return fetch('https://jsonplaceholder.typicode.com/albums').then((response) => response.json());
+    return new Promise((resolve, reject) => {
+        $.ajax('https://jsonplaceholder.typicode.com/albums', {
+            success: (data) => {
+                resolve(data);
+            },
+            error: (errorThrown) => {
+                reject(new Error(errorThrown));
+            },
+        });
+    });
 }
 
 function sendPhotosRequest(albumID) {
-    return fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumID}`).then((response) => response.json());
+    return new Promise((resolve, reject) => {
+        $.ajax(`https://jsonplaceholder.typicode.com/photos?albumId=${albumID}`, {
+            success: (data) => {
+                resolve(data);
+            },
+            error: (errorThrown) => {
+                reject(new Error(errorThrown));
+            },
+        });
+    });
 }
 
 
