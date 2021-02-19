@@ -1,0 +1,16 @@
+.container {
+    margin-top: 50px;
+}
+
+.row {
+    justify-content: center;
+}
+
+.col-4 {
+    max-height: 500px;
+    overflow: auto;
+}
+
+.card-img-top {
+    max-height: 70px;
+}
