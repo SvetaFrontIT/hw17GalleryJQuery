@@ -5,8 +5,8 @@
 
 // Сразу при загрузке приложения и получения списка альбомов, в правой части нужно показать фотографии из первого альбома в списке
 
-const albumsList = $('.js-album-list');
-const gallery = $('.js-gallery');
+const $albumsList = $('.js-album-list');
+const $gallery = $('.js-gallery');
 
 //LOGIC
 function getAlbums() {
@@ -18,8 +18,8 @@ function getAlbums() {
 }
 
 function getFirstAlbum() {
-    const album = $('.js-album:first');
-    getPhotos(album.attr('id'))
+    const $album = $('.js-album:first');
+    getPhotos($album.attr('id'))
 }
 
 
@@ -31,7 +31,7 @@ function getPhotos(albumID) {
 }
 
 function createAlbumEventListener() {
-    albumsList.click((event) => {
+    $albumsList.click((event) => {
         if (event.target.classList.contains('js-album')) {
             clearGallery();
             getPhotos(event.target.id);
@@ -80,17 +80,17 @@ function sendPhotosRequest(albumID) {
 //RENDER
 function renderAlbums(response) {
     const album = response.map(album => getAlbumItem(album));
-    albumsList.html(album.join(''));
+    $albumsList.html(album);
 }
 
 function renderPhotos(response) {
     const photos = response.map(photo => getPhotoItem(photo));
-    gallery.html(photos.join(''));
+    $gallery.html(photos);
 }
 
 //CLEAR
 function clearGallery() {
-    gallery.html('');
+    $gallery.html('');
 }
 
 
